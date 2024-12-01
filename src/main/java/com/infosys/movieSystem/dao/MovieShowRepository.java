@@ -10,10 +10,10 @@ import com.infosys.movieSystem.bean.MovieShow;
 import com.infosys.movieSystem.bean.MovieShowEmbed;
 
 @Repository
-public interface MovieShowRepository extends JpaRepository<MovieShow,MovieShowEmbed> {
+public interface MovieShowRepository extends JpaRepository<MovieShow, MovieShowEmbed> {
 
-	@Query("select embeddedId from MovieShow")
-	public List<MovieShowEmbed> getAllIds();
-	
-} 
- 
+    // Custom query to fetch all MovieShow IDs (embedded IDs)
+    @Query("select embeddedId from MovieShow")
+    List<MovieShowEmbed> getAllIds();
+    
+}

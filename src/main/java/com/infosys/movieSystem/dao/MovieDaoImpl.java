@@ -73,6 +73,13 @@ public class MovieDaoImpl implements MovieDao{
 	public List<Movie> getLanguagewiseMovieList(String language) {
 		return repository.getLanguagewiseMovieList(language);
 	}
+
+    @Override
+    public Movie getMovie(String movieId) {
+        return repository.findByMovieId(movieId);  // Ensure the repository method works with String
+    }
+	
+
 	
 	
 	

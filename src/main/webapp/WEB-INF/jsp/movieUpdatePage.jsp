@@ -107,6 +107,12 @@
                 <form:input id="ratings" path="ratings" required="true" class="form-control" />
             </div>
 
+            <!-- Editable URL field for image -->
+            <div class="mb-3">
+                <label for="url" class="form-label">Movie Image URL</label>
+                <form:input id="url" path="url" class="form-control" />
+            </div>
+
             <!-- Submit and Reset buttons -->
             <div class="text-center">
                 <button type="submit" class="btn btn-custom">Update Movie</button>

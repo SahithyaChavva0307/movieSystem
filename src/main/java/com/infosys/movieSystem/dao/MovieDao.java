@@ -16,5 +16,8 @@ public interface MovieDao {
 	public List<Movie> findAll();
 	public void deleteMovieById(String id);
 	public List<Movie> getLanguagewiseMovieList (String language);
-	public Set<String> getAllLanguages();  
+	public Set<String> getAllLanguages();
+	public Movie getMovie(String movieId);
+	
+
 }

@@ -12,4 +12,9 @@ public interface ShowTimeDao {
 	public List<ShowTime> findAll();
 	public void deleteShowTimeById(Integer Id);
 	public List<Integer> getAllIds();
+	public String getShowTimeName(Integer showTimeId);
+	public ShowTime getShowTime(String showTimeName);
+	
+
+	
 }

@@ -12,141 +12,145 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
-        /* Background image */
+        /* General body styling */
         body {
-            background-image: url('https://img.freepik.com/free-vector/cinema-stage-background-with-clapperboard-popcorn-chairs_1017-38722.jpg?uid=R128034498&ga=GA1.1.1443282485.1731505884&semt=ais_hybrid');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            color: white;
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
         }
 
-        /* Container for the report */
+        /* Container for movie cards */
         .container {
-            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background for readability */
-            padding: 30px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Three cards per row */
+            gap: 20px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        /* Movie card styling */
+        .movie-card {
+            background-color: rgba(0, 0, 0, 0.8); /* Dark background with transparency */
+            color: #ffffff; /* White text for visibility */
             border-radius: 10px;
-            margin-top: 50px;
-        }
-
-        /* Heading */
-        h1 {
-            text-align: center;
-            text-decoration: underline;
-            margin-bottom: 30px;
-        }
-
-        /* Table styles */
-        table {
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: center;
-            border: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #007bff;
-            color: white;
-        }
-
-        td {
-            background-color: #f9f9f9;
-        }
-
-        /* Links */
-        a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        a:hover {
-            color: #0056b3;
-            text-decoration: underline;
-        }
-
-        /* Show Details section */
-        .show-details {
-            background-color: rgba(255, 255, 255, 0.5); /* Transparent background for readability */
             padding: 15px;
-            border-radius: 8px;
-        }
-
-        /* Button styles */
-        .btn-custom {
-            margin: 5px;
-        }
-
-        /* Attribution */
-        .attribution {
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
             text-align: center;
-            font-size: 12px;
-            color: white;
+            height: auto; /* Adjust height dynamically based on content */
+            width: 100%;
+            max-width: 1000px; /* Max width to match the image dimensions */
+        }
+
+        .movie-card h3 {
+            color: #ffd700; /* Gold for movie titles */
+            font-size: 1.5rem;
+        }
+
+        .movie-card p {
+            margin: 5px 0;
+            font-size: 1rem;
+        }
+
+        /* Movie image styling */
+        .movie-card img {
+            width: 100%; /* Full width of the movie card */
+            max-width: 1000px; /* Adjust image width to match card's max-width */
+            max-height: 1500px; /* Image max height to fit the image dimensions */
+            object-fit: cover; /* Ensures image fills the area without distortion */
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .btn-custom {
+            margin-top: 10px;
+        }
+        .page-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #007bff; /* Blue color */
             margin-top: 20px;
         }
+
+        /* Return to Index */
+        .return-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .return-link a {
+            font-size: 1.2rem;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .return-link a:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsiveness for mobile */
+        @media (max-width: 992px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr); /* Two cards per row on smaller screens */
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                grid-template-columns: 1fr; /* One card per row on very small screens */
+            }
+
+            .movie-card img {
+                max-height: 800px; /* Smaller image on mobile */
+            }
+        }
+
     </style>
 </head>
 <body>
-
-<div class="container">
+<div class="page-title">
     <h1>Movie Report</h1>
-
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Movie Number</th>
-                <th>Movie Name</th>
-                <th>Language</th>
-                <th>Genre</th>
-                <th>Duration</th>
-                <th>Rating</th>
-                <th>Show Details</th>
-               
-            </tr>
-        </thead>
-        <tbody>
-            <c:forEach items="${movieList}" var="movie">
-                <tr>
-                    <td style="color: #f0f0f0;">${movie.movieId}</td>
-                    <td style="color: #ffd700;">${movie.movieName}</td>
-                    <td style="color: #f0f0f0;">${movie.language}</td>
-                    <td style="color: #f0f0f0;">${movie.genre}</td>
-                    <td style="color: #f0f0f0;">${movie.duration}</td>
-                    <td style="color: #f0f0f0;">${movie.ratings}</td>
-
-                    <td>
-                        <div class="show-details">
-                            <c:forEach items="${movieMap}" var="showTime">
-                                <c:if test="${movie.movieId == showTime.key}">
-                                    <table class="table table-sm table-striped" style="margin-top: 10px;">
-                                        <c:forEach items="${showTime.value}" var="show">
-                                            <tr><td>Show Time Name:</td><td>${show.showTimeName}</td></tr>
-                                            <tr><td>Royal Seat:</td><td>${show.royalSeatNumber}</td></tr>
-                                            <tr><td>Royal Booked:</td><td>${show.royalBooked}</td></tr>
-                                            <tr><td>Premier Seat:</td><td>${show.premierSeatNumber}</td></tr>
-                                            <tr><td>Premier Booked:</td><td>${show.premierBooked}</td></tr>
-                                        </c:forEach>
-                                    </table>
-                                </c:if>
-                            </c:forEach>
-                        </div>
-                    </td>
-                         </tr>
-            </c:forEach>
-        </tbody>
-    </table>
-
-    <br/>
-    <h3><a href="/index" class="text-white">Return</a></h3>
 </div>
 
-<!-- Attribution -->
-<div class="attribution">
-    Image by <a href="https://thumbs.dreamstime.com/b/movie-film-strip-reel-popcorn-background-cinema-concept-321870052.jpg" target="_blank" style="color: white;">blank</a>
+<div class="container">
+    <c:forEach items="${movieList}" var="movie">
+        <div class="movie-card">
+            <!-- Display Movie Image -->
+            <img 
+                src="${movie.url != null ? movie.url : 'https://via.placeholder.com/800x1200'}" 
+                alt="${movie.movieName}" 
+                class="img-fluid">
+            <h3>${movie.movieName}</h3>
+            <p><strong>Movie Number:</strong> ${movie.movieId}</p>
+            <p><strong>Language:</strong> ${movie.language}</p>
+            <p><strong>Genre:</strong> ${movie.genre}</p>
+            <p><strong>Duration:</strong> ${movie.duration}</p>
+            <p><strong>Rating:</strong> ${movie.ratings}</p>
+
+            <div>
+                <c:forEach items="${movieMap}" var="showTime">
+                    <c:if test="${movie.movieId == showTime.key}">
+                        <c:forEach items="${showTime.value}" var="show">
+                            <p><strong>Show Time Name:</strong> ${show.showTimeName}</p>
+                            <p><strong>Royal Seats:</strong> ${show.royalSeatNumber} (Booked: ${show.royalBooked})</p>
+                            <p><strong>Premier Seats:</strong> ${show.premierSeatNumber} (Booked: ${show.premierBooked})</p>
+                        </c:forEach>
+                    </c:if>
+                </c:forEach>
+            </div>
+
+
+        </div>
+    </c:forEach>
+</div>
+
+<!-- Return to Index -->
+<div class="return-link">
+    <a href="/index">Return to Index</a>
 </div>
 
 <!-- Bootstrap JS -->
